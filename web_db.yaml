@@ -1,0 +1,29 @@
+---
+- name: Setup WebServers
+  hosts: websrvgrp
+  become: yes
+  tasks:
+    - name: Install Apache httpd
+      yum: 
+        name: httpd
+        state: present
+    - name: Start and enable httpd
+      service:
+        name: httpd
+        state: started
+        enabled: yes
+
+- name: Setup DbServers
+  hosts: dbsrvgrp
+  become: yes
+  tasks:
+    - name: Install mysql
+      yum: 
+        name: mariadb-server
+        state: present
+    - name: Start and enable mysql
+      service:
+        name: mariadb
+        state: started
+        enabled: yes
+  
